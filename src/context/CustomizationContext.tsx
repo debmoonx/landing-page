@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import defaultHeroImage from '../assets/images/hero_deb_landscape_1793458325980.jpg';
+import defaultWtrImage from '../assets/images/wholikestherain_experience_1793381143047.jpg';
 
 export interface SiteCopy {
   heroHeadline: string;
@@ -62,8 +64,8 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
   workSubtext: "Tell me about your project, venture, or goals, and let's explore how we can collaborate.",
 };
 
-const DEFAULT_HERO_IMAGE = '/src/assets/images/hero_deb_landscape_1793458325980.jpg';
-const DEFAULT_WTR_IMAGE = '/src/assets/images/wholikestherain_experience_1793381143047.jpg';
+const DEFAULT_HERO_IMAGE = defaultHeroImage;
+const DEFAULT_WTR_IMAGE = defaultWtrImage;
 const DEFAULT_SUBSTACK = 'https://wholikestherain.substack.com';
 const DEFAULT_INSTAGRAM = 'https://instagram.com/debmoonx';
 const DEFAULT_LINKEDIN = 'https://linkedin.com/in/debbieifeigwu';
