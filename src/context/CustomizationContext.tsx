@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import defaultHeroImage from '../assets/images/hero_deb_landscape_1793458325980.jpg';
+import defaultHeroImage from '../assets/images/Facetune_24-06-2025-10-23-27 3.jpeg';
 import defaultWtrImage from '../assets/images/wholikestherain_experience_1793381143047.jpg';
 
 export interface SiteCopy {
@@ -74,7 +74,7 @@ const DEFAULT_YOUTUBE = 'https://youtube.com/@debmoonx';
 const DEFAULT_EMAIL = 'mailto:ezinneifegwu@gmail.com';
 const DEFAULT_CALENDLY = 'https://calendly.com/debifegwu/discovery-call';
 
-const STORAGE_KEY_HERO = 'deb_site_hero_landscape_v3';
+const STORAGE_KEY_HERO = 'deb_site_hero_portrait_v4';
 const STORAGE_KEY_WTR = 'deb_site_wtr_image_v3';
 const STORAGE_KEY_SUBSTACK = 'deb_site_substack_url';
 const STORAGE_KEY_INSTA = 'deb_site_insta_url';
