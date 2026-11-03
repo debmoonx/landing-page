@@ -50,7 +50,7 @@ export const WorkWithMeSection: React.FC = () => {
 
   // Google Sheet Webhook Sync
   const [googleSheetWebhook, setGoogleSheetWebhook] = useState(() => {
-    return localStorage.getItem('deb_google_sheet_webhook') || '';
+    return localStorage.getItem('deb_google_sheet_webhook') || import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK || '';
   });
   const [showConfig, setShowConfig] = useState(false);
 
@@ -121,7 +121,7 @@ export const WorkWithMeSection: React.FC = () => {
         await fetch(googleSheetWebhook.trim(), {
           method: 'POST',
           mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(submission),
         });
       } catch (err) {
