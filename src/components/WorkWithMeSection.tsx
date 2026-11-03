@@ -88,6 +88,13 @@ export const WorkWithMeSection: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const webhook = googleSheetWebhook.trim();
+    if (!webhook) {
+      alert('The inquiry form is not connected yet. Please try again later or email ezinneifegwu@gmail.com directly.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     const submission: WorkInquiry = {
@@ -106,43 +113,31 @@ export const WorkWithMeSection: React.FC = () => {
       submittedAt: new Date().toISOString(),
     };
 
-    // 1. Store in local browser storage
     try {
-      const existing = JSON.parse(localStorage.getItem('deb_inquiries') || '[]');
-      existing.unshift(submission);
-      localStorage.setItem('deb_inquiries', JSON.stringify(existing));
-    } catch {
-      // ignore
-    }
+      await fetch(webhook, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(submission),
+      });
 
-    // 2. Dispatch to Google Sheet Webhook if configured
-    if (googleSheetWebhook.trim()) {
+      // Keep a local copy only in the owner's browser as a convenience.
       try {
-        await fetch(googleSheetWebhook.trim(), {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(submission),
-        });
-      } catch (err) {
-        console.warn('Google Sheet dispatch:', err);
-      }
-    }
-
-    // 3. Automatically open Calendly discovery call link directly for booking
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-
-      try {
-        window.open(calendlyUrl, '_blank', 'noopener,noreferrer');
+        const existing = JSON.parse(localStorage.getItem('deb_inquiries') || '[]');
+        existing.unshift(submission);
+        localStorage.setItem('deb_inquiries', JSON.stringify(existing));
       } catch {
-        // fallback
+        // The server submission has already been sent.
       }
 
-      const el = document.getElementById('work-with-me');
-      el?.scrollIntoView({ behavior: 'smooth' });
-    }, 600);
+      setSubmitted(true);
+      document.getElementById('work-with-me')?.scrollIntoView({ behavior: 'smooth' });
+    } catch (error) {
+      console.error('Inquiry submission failed:', error);
+      alert('Your inquiry could not be sent. Please try again or email ezinneifegwu@gmail.com directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const exportToCsv = () => {
