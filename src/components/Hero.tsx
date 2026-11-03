@@ -57,11 +57,11 @@ export const Hero: React.FC = () => {
 
         {/* Hero Photo (Generous framing, never chops head or shoulders) */}
         <div className="w-full relative group">
-          <div className="relative aspect-[4/3] sm:aspect-[16/10] md:aspect-[16/10] max-h-[580px] w-full rounded-2xl md:rounded-3xl overflow-hidden bg-[#ECECE6] border border-[#E4E4DE] shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
+          <div className="relative aspect-[2/3] max-h-[760px] max-w-[510px] mx-auto w-full rounded-2xl md:rounded-3xl overflow-hidden bg-[#ECECE6] border border-[#E4E4DE] shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
             <img
               src={heroImage}
               alt="Deb Ifegwu"
-              className="w-full h-full object-cover object-[center_top] sm:object-[center_15%] transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+              className="w-full h-full object-contain object-center"
               referrerPolicy="no-referrer"
             />
 
