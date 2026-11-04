@@ -62,7 +62,7 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
 const DEFAULT_HERO_IMAGE = defaultHeroImage;
 const DEFAULT_WTR_IMAGE = defaultWtrImage;
 const DEFAULT_SUBSTACK = 'https://wholikestherain.substack.com';
-const DEFAULT_INSTAGRAM = 'https://instagram.com/debmoonx';
+const DEFAULT_INSTAGRAM = 'https://www.instagram.com/wholikestherain?obrf=MnM3dTJ3bGZ4MjM2&utm_source=qr';
 const DEFAULT_LINKEDIN = 'https://linkedin.com/in/debbieifeigwu';
 const DEFAULT_TWITTER = 'https://x.com/debmoonx';
 const DEFAULT_YOUTUBE = 'https://youtube.com/@debmoonx';
