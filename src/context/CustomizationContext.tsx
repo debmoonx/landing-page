@@ -112,7 +112,14 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       const stored = localStorage.getItem(STORAGE_KEY_COPY);
       if (stored) {
-        return { ...DEFAULT_SITE_COPY, ...JSON.parse(stored) };
+        const savedCopy = JSON.parse(stored);
+        if (savedCopy.communityDescription === 'Bringing together founders, investors, and builders to connect through curated dinners, founder and investor meetups, and shared experiences.') {
+          savedCopy.communityDescription = 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and founder-investor meetups. Stay connected between gatherings with our weekly newsletter, featuring useful opportunities and insights.';
+        }
+        if (savedCopy.communityTitle === 'Wholikestherain') {
+          savedCopy.communityTitle = 'wholikestherain';
+        }
+        return { ...DEFAULT_SITE_COPY, ...savedCopy };
       }
     } catch {
       // fallback
