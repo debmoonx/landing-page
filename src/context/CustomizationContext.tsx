@@ -57,8 +57,8 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
   aboutParagraph1: 'Bridging innovation, venture growth, business development, and capital markets, I combine hands on leadership with strategic advisory for fast growing ventures.',
   aboutParagraph2: 'My focus is on fundraising readiness, narrative strategy, go to market execution, and ecosystem partnerships across emerging markets and global stages.',
   communityTagline: 'The Community',
-  communityTitle: 'Wholikestherain',
-  communityDescription: 'Bringing together founders, investors, and builders to connect through curated dinners, founder and investor meetups, and shared experiences.',
+  communityTitle: 'wholikestherain',
+  communityDescription: 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and founder-investor meetups. Stay connected between gatherings with our weekly newsletter, featuring useful opportunities and insights.',
   workTagline: 'Work With Me',
   workHeading: 'Building something?',
   workSubtext: "Tell me about your project, venture, or goals, and let's explore how we can collaborate.",
@@ -67,7 +67,7 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
 const DEFAULT_HERO_IMAGE = defaultHeroImage;
 const DEFAULT_WTR_IMAGE = defaultWtrImage;
 const DEFAULT_SUBSTACK = 'https://wholikestherain.substack.com';
-const DEFAULT_INSTAGRAM = 'https://instagram.com/debmoonx';
+const DEFAULT_INSTAGRAM = 'https://www.instagram.com/wholikestherain?obrf=MnM3dTJ3bGZ4MjM2&utm_source=qr';
 const DEFAULT_LINKEDIN = 'https://linkedin.com/in/debbieifeigwu';
 const DEFAULT_TWITTER = 'https://x.com/debmoonx';
 const DEFAULT_YOUTUBE = 'https://youtube.com/@debmoonx';
