@@ -1,4 +1,5 @@
 name: Deploy website to GitHub Pages
+# Rebuild after configuring the inquiry form webhook secret.
 
 on:
   push:
