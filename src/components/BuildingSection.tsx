@@ -101,7 +101,7 @@ export const BuildingSection: React.FC = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[#111111] text-white text-xs font-medium tracking-wide hover:bg-[#2C2C2C] transition-all shadow-xs group cursor-pointer"
                 >
-                  <span>Join</span>
+                  <span>Join the community</span>
                   <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
 
@@ -112,7 +112,7 @@ export const BuildingSection: React.FC = () => {
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#D5D5CF] text-[#222222] text-xs font-medium tracking-wide hover:border-[#111111] hover:bg-white transition-all group cursor-pointer"
                 >
                   <BookOpen className="w-3 h-3 text-[#555555]" />
-                  <span>Read on Substack</span>
+                  <span>Subscribe to our weekly newsletter</span>
                   <ArrowUpRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               </div>
