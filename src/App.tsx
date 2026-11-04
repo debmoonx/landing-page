@@ -11,7 +11,6 @@ import { About } from './components/About';
 import { FloatingLogos } from './components/FloatingLogos';
 import { BuildingSection } from './components/BuildingSection';
 import { WorkWithMeSection } from './components/WorkWithMeSection';
-import { OwnerControls } from './components/OwnerControls';
 
 export default function App() {
   useEffect(() => {
@@ -57,8 +56,6 @@ export default function App() {
           <WorkWithMeSection />
         </main>
 
-        {/* Owner Controls & Public Footer */}
-        <OwnerControls />
       </div>
     </CustomizationProvider>
   );
