@@ -86,24 +86,7 @@ const CustomizationContext = createContext<CustomizationState | undefined>(undef
 
 export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Owner mode state: default false for regular visitors so backend & edit tools remain locked
-  const [isOwnerMode, setIsOwnerMode] = useState<boolean>(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        const params = new URLSearchParams(window.location.search);
-        if (
-          params.get('admin') === 'true' ||
-          params.get('edit') === 'true' ||
-          params.get('owner') === 'true'
-        ) {
-          return true;
-        }
-        return localStorage.getItem(STORAGE_KEY_AUTH) === 'true';
-      }
-    } catch {
-      // fallback
-    }
-    return false;
-  });
+  const [isOwnerMode, setIsOwnerMode] = useState<boolean>(false);
 
   const [showTextEditorModal, setShowTextEditorModal] = useState(false);
 
@@ -256,14 +239,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
   const updateInstagramUrl = (url: string) => setInstagramUrl(url);
   const updateCalendlyUrl = (url: string) => setCalendlyUrl(url);
 
-  const unlockOwnerMode = (passcode?: string): boolean => {
-    // Allows instant unlock if entered passcode is '2026' or 'deb' or if clicked in admin environment
-    if (!passcode || passcode.trim() === '2026' || passcode.trim().toLowerCase() === 'deb') {
-      setIsOwnerMode(true);
-      return true;
-    }
-    return false;
-  };
+  const unlockOwnerMode = (_passcode?: string): boolean => false;
 
   const lockOwnerMode = () => {
     setIsOwnerMode(false);
