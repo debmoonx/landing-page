@@ -18,20 +18,15 @@ export interface SiteCopy {
 }
 
 interface CustomizationState {
-  // Owner Mode & Security (Hides edit/management controls from public consumers)
   isOwnerMode: boolean;
   setIsOwnerMode: (active: boolean) => void;
   unlockOwnerMode: (passcode?: string) => boolean;
   lockOwnerMode: () => void;
   showTextEditorModal: boolean;
   setShowTextEditorModal: (show: boolean) => void;
-
-  // Editable Site Copy
   siteCopy: SiteCopy;
   updateSiteCopy: (key: keyof SiteCopy, value: string) => void;
   resetSiteCopy: () => void;
-
-  // Images & Links
   heroImage: string;
   wholikestherainImage: string;
   substackUrl: string;
@@ -58,7 +53,7 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
   aboutParagraph2: 'My focus is on fundraising readiness, narrative strategy, go to market execution, and ecosystem partnerships across emerging markets and global stages.',
   communityTagline: 'The Community',
   communityTitle: 'wholikestherain',
-  communityDescription: 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and founder-investor meetups. Stay connected between gatherings with our weekly newsletter, featuring useful opportunities and insights.',
+  communityDescription: 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and meetups. Stay connected between gatherings with our weekly newsletter, featuring useful opportunities and insights.',
   workTagline: 'Work With Me',
   workHeading: 'Building something?',
   workSubtext: "Tell me about your project, venture, or goals, and let's explore how we can collaborate.",
@@ -67,7 +62,7 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
 const DEFAULT_HERO_IMAGE = defaultHeroImage;
 const DEFAULT_WTR_IMAGE = defaultWtrImage;
 const DEFAULT_SUBSTACK = 'https://wholikestherain.substack.com';
-const DEFAULT_INSTAGRAM = 'https://www.instagram.com/wholikestherain?obrf=MnM3dTJ3bGZ4MjM2&utm_source=qr';
+const DEFAULT_INSTAGRAM = 'https://instagram.com/debmoonx';
 const DEFAULT_LINKEDIN = 'https://linkedin.com/in/debbieifeigwu';
 const DEFAULT_TWITTER = 'https://x.com/debmoonx';
 const DEFAULT_YOUTUBE = 'https://youtube.com/@debmoonx';
@@ -85,23 +80,16 @@ const STORAGE_KEY_AUTH = 'deb_site_owner_authenticated_v1';
 const CustomizationContext = createContext<CustomizationState | undefined>(undefined);
 
 export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Owner mode state: default false for regular visitors so backend & edit tools remain locked
   const [isOwnerMode, setIsOwnerMode] = useState<boolean>(false);
-
   const [showTextEditorModal, setShowTextEditorModal] = useState(false);
 
-  // Editable site copy
   const [siteCopy, setSiteCopy] = useState<SiteCopy>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY_COPY);
       if (stored) {
         const savedCopy = JSON.parse(stored);
-        if (savedCopy.communityDescription === 'Bringing together founders, investors, and builders to connect through curated dinners, founder and investor meetups, and shared experiences.') {
-          savedCopy.communityDescription = 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and founder-investor meetups. Stay connected between gatherings with our weekly newsletter, featuring useful opportunities and insights.';
-        }
-        if (savedCopy.communityTitle === 'Wholikestherain') {
-          savedCopy.communityTitle = 'wholikestherain';
-        }
+        savedCopy.communityDescription = DEFAULT_SITE_COPY.communityDescription;
+        if (savedCopy.communityTitle === 'Wholikestherain') savedCopy.communityTitle = 'wholikestherain';
         return { ...DEFAULT_SITE_COPY, ...savedCopy };
       }
     } catch {
@@ -111,43 +99,30 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   const [heroImage, setHeroImage] = useState<string>(() => {
-    try {
-      return localStorage.getItem(STORAGE_KEY_HERO) || DEFAULT_HERO_IMAGE;
-    } catch {
-      return DEFAULT_HERO_IMAGE;
-    }
+    try { return localStorage.getItem(STORAGE_KEY_HERO) || DEFAULT_HERO_IMAGE; }
+    catch { return DEFAULT_HERO_IMAGE; }
   });
 
   const [wholikestherainImage, setWholikestherainImage] = useState<string>(() => {
-    try {
-      return localStorage.getItem(STORAGE_KEY_WTR) || DEFAULT_WTR_IMAGE;
-    } catch {
-      return DEFAULT_WTR_IMAGE;
-    }
+    try { return localStorage.getItem(STORAGE_KEY_WTR) || DEFAULT_WTR_IMAGE; }
+    catch { return DEFAULT_WTR_IMAGE; }
   });
 
   const [substackUrl, setSubstackUrl] = useState<string>(() => {
-    try {
-      return localStorage.getItem(STORAGE_KEY_SUBSTACK) || DEFAULT_SUBSTACK;
-    } catch {
-      return DEFAULT_SUBSTACK;
-    }
+    try { return localStorage.getItem(STORAGE_KEY_SUBSTACK) || DEFAULT_SUBSTACK; }
+    catch { return DEFAULT_SUBSTACK; }
   });
 
   const [instagramUrl, setInstagramUrl] = useState<string>(() => {
     try {
-      return localStorage.getItem(STORAGE_KEY_INSTA) || DEFAULT_INSTAGRAM;
-    } catch {
-      return DEFAULT_INSTAGRAM;
-    }
+      const saved = localStorage.getItem(STORAGE_KEY_INSTA);
+      return !saved || saved.includes('wholikestherain?obrf=') ? DEFAULT_INSTAGRAM : saved;
+    } catch { return DEFAULT_INSTAGRAM; }
   });
 
   const [calendlyUrl, setCalendlyUrl] = useState<string>(() => {
-    try {
-      return localStorage.getItem(STORAGE_KEY_CALENDLY) || DEFAULT_CALENDLY;
-    } catch {
-      return DEFAULT_CALENDLY;
-    }
+    try { return localStorage.getItem(STORAGE_KEY_CALENDLY) || DEFAULT_CALENDLY; }
+    catch { return DEFAULT_CALENDLY; }
   });
 
   const linkedinUrl = DEFAULT_LINKEDIN;
@@ -155,69 +130,41 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
   const youtubeUrl = DEFAULT_YOUTUBE;
   const emailAddress = DEFAULT_EMAIL;
 
-  // Persist Copy
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_COPY, JSON.stringify(siteCopy));
-    } catch (e) {
-      console.warn('Copy save error', e);
-    }
+    try { localStorage.setItem(STORAGE_KEY_COPY, JSON.stringify(siteCopy)); }
+    catch (e) { console.warn('Copy save error', e); }
   }, [siteCopy]);
 
-  // Persist Hero Image
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_HERO, heroImage);
-    } catch (e) {
-      console.warn('Hero image save error', e);
-    }
+    try { localStorage.setItem(STORAGE_KEY_HERO, heroImage); }
+    catch (e) { console.warn('Hero image save error', e); }
   }, [heroImage]);
 
-  // Persist Wholikestherain Image
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_WTR, wholikestherainImage);
-    } catch (e) {
-      console.warn('WTR image save error', e);
-    }
+    try { localStorage.setItem(STORAGE_KEY_WTR, wholikestherainImage); }
+    catch (e) { console.warn('WTR image save error', e); }
   }, [wholikestherainImage]);
 
-  // Persist Links
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_SUBSTACK, substackUrl);
-    } catch {
-      // ignore
-    }
+    try { localStorage.setItem(STORAGE_KEY_SUBSTACK, substackUrl); }
+    catch { /* ignore */ }
   }, [substackUrl]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_INSTA, instagramUrl);
-    } catch {
-      // ignore
-    }
+    try { localStorage.setItem(STORAGE_KEY_INSTA, instagramUrl); }
+    catch { /* ignore */ }
   }, [instagramUrl]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY_CALENDLY, calendlyUrl);
-    } catch {
-      // ignore
-    }
+    try { localStorage.setItem(STORAGE_KEY_CALENDLY, calendlyUrl); }
+    catch { /* ignore */ }
   }, [calendlyUrl]);
 
-  // Persist Owner Auth
   useEffect(() => {
     try {
-      if (isOwnerMode) {
-        localStorage.setItem(STORAGE_KEY_AUTH, 'true');
-      } else {
-        localStorage.removeItem(STORAGE_KEY_AUTH);
-      }
-    } catch {
-      // ignore
-    }
+      if (isOwnerMode) localStorage.setItem(STORAGE_KEY_AUTH, 'true');
+      else localStorage.removeItem(STORAGE_KEY_AUTH);
+    } catch { /* ignore */ }
   }, [isOwnerMode]);
 
   const updateSiteCopy = (key: keyof SiteCopy, value: string) => {
@@ -226,11 +173,8 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const resetSiteCopy = () => {
     setSiteCopy(DEFAULT_SITE_COPY);
-    try {
-      localStorage.removeItem(STORAGE_KEY_COPY);
-    } catch {
-      // ignore
-    }
+    try { localStorage.removeItem(STORAGE_KEY_COPY); }
+    catch { /* ignore */ }
   };
 
   const updateHeroImage = (newUrl: string) => setHeroImage(newUrl);
@@ -246,7 +190,6 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
     setShowTextEditorModal(false);
     try {
       localStorage.removeItem(STORAGE_KEY_AUTH);
-      // Clean query params from URL without reload
       if (typeof window !== 'undefined' && window.history) {
         const url = new URL(window.location.href);
         url.searchParams.delete('admin');
@@ -254,9 +197,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
         url.searchParams.delete('owner');
         window.history.replaceState({}, '', url.pathname);
       }
-    } catch {
-      // ignore
-    }
+    } catch { /* ignore */ }
   };
 
   const resetToDefaults = () => {
@@ -273,40 +214,19 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
       localStorage.removeItem(STORAGE_KEY_INSTA);
       localStorage.removeItem(STORAGE_KEY_CALENDLY);
       localStorage.removeItem(STORAGE_KEY_COPY);
-    } catch {
-      // ignore
-    }
+    } catch { /* ignore */ }
   };
 
   return (
-    <CustomizationContext.Provider
-      value={{
-        isOwnerMode,
-        setIsOwnerMode,
-        unlockOwnerMode,
-        lockOwnerMode,
-        showTextEditorModal,
-        setShowTextEditorModal,
-        siteCopy,
-        updateSiteCopy,
-        resetSiteCopy,
-        heroImage,
-        wholikestherainImage,
-        substackUrl,
-        instagramUrl,
-        calendlyUrl,
-        linkedinUrl,
-        twitterUrl,
-        youtubeUrl,
-        emailAddress,
-        updateHeroImage,
-        updateWholikestherainImage,
-        updateSubstackUrl,
-        updateInstagramUrl,
-        updateCalendlyUrl,
-        resetToDefaults,
-      }}
-    >
+    <CustomizationContext.Provider value={{
+      isOwnerMode, setIsOwnerMode, unlockOwnerMode, lockOwnerMode,
+      showTextEditorModal, setShowTextEditorModal,
+      siteCopy, updateSiteCopy, resetSiteCopy,
+      heroImage, wholikestherainImage, substackUrl, instagramUrl, calendlyUrl,
+      linkedinUrl, twitterUrl, youtubeUrl, emailAddress,
+      updateHeroImage, updateWholikestherainImage, updateSubstackUrl,
+      updateInstagramUrl, updateCalendlyUrl, resetToDefaults,
+    }}>
       {children}
     </CustomizationContext.Provider>
   );
@@ -314,8 +234,6 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
 
 export const useCustomization = () => {
   const context = useContext(CustomizationContext);
-  if (!context) {
-    throw new Error('useCustomization must be used within a CustomizationProvider');
-  }
+  if (!context) throw new Error('useCustomization must be used within a CustomizationProvider');
   return context;
 };
