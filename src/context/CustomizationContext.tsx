@@ -53,7 +53,7 @@ export const DEFAULT_SITE_COPY: SiteCopy = {
   aboutParagraph2: 'My focus is on fundraising readiness, narrative strategy, go to market execution, and ecosystem partnerships across emerging markets and global stages.',
   communityTagline: 'The Community',
   communityTitle: 'wholikestherain',
-  communityDescription: 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and meetups. Stay connected between gatherings with our weekly newsletter, featuring useful opportunities and insights.',
+  communityDescription: 'Bringing together founders, investors, and builders through meaningful connections, curated experiences, and meetups.',
   workTagline: 'Work With Me',
   workHeading: 'Building something?',
   workSubtext: "Tell me about your project, venture, or goals, and let's explore how we can collaborate.",
