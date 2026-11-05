@@ -67,7 +67,7 @@ const DEFAULT_LINKEDIN = 'https://linkedin.com/in/debbieifeigwu';
 const DEFAULT_TWITTER = 'https://x.com/debmoonx';
 const DEFAULT_YOUTUBE = 'https://youtube.com/@debmoonx';
 const DEFAULT_EMAIL = 'mailto:ezinneifegwu@gmail.com';
-const DEFAULT_CALENDLY = 'https://calendly.com/debifegwu/discovery-call';
+const DEFAULT_CALENDLY = 'https://calendly.com/debifegwu/';
 
 const STORAGE_KEY_HERO = 'deb_site_hero_portrait_v4';
 const STORAGE_KEY_WTR = 'deb_site_wtr_image_v3';
