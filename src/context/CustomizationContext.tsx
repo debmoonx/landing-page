@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import defaultHeroImage from '../assets/images/Facetune_24-06-2025-10-23-27 3.jpeg';
-import defaultWtrImage from '../assets/images/wholikestherain_experience_1793381143047.jpg';
+import defaultWtrImage from '../assets/images/IMG_6999.jpeg';
 
 export interface SiteCopy {
   heroHeadline: string;
@@ -103,10 +103,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
     catch { return DEFAULT_HERO_IMAGE; }
   });
 
-  const [wholikestherainImage, setWholikestherainImage] = useState<string>(() => {
-    try { return localStorage.getItem(STORAGE_KEY_WTR) || DEFAULT_WTR_IMAGE; }
-    catch { return DEFAULT_WTR_IMAGE; }
-  });
+  const [wholikestherainImage, setWholikestherainImage] = useState<string>(DEFAULT_WTR_IMAGE);
 
   const [substackUrl, setSubstackUrl] = useState<string>(() => {
     try { return localStorage.getItem(STORAGE_KEY_SUBSTACK) || DEFAULT_SUBSTACK; }
