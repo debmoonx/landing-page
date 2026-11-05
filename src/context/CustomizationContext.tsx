@@ -112,8 +112,7 @@ export const CustomizationProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const [instagramUrl, setInstagramUrl] = useState<string>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY_INSTA);
-      return !saved || saved.includes('wholikestherain?obrf=') ? DEFAULT_INSTAGRAM : saved;
+      return DEFAULT_INSTAGRAM;
     } catch { return DEFAULT_INSTAGRAM; }
   });
 
