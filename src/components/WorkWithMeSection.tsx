@@ -50,7 +50,7 @@ export const WorkWithMeSection: React.FC = () => {
 
   // Google Sheet Webhook Sync
   const [googleSheetWebhook, setGoogleSheetWebhook] = useState(() => {
-    return localStorage.getItem('deb_google_sheet_webhook') || import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK || '';
+    return import.meta.env.VITE_GOOGLE_SHEETS_WEBHOOK || localStorage.getItem('deb_google_sheet_webhook') || '';
   });
   const [showConfig, setShowConfig] = useState(false);
 
@@ -300,7 +300,7 @@ export const WorkWithMeSection: React.FC = () => {
                   Inquiry Submitted Successfully
                 </h3>
                 <p className="text-xs text-[#666666]">
-                  Your responses are saved and delivered to ezinneifegwu@gmail.com.
+                  Your inquiry has been sent. You can now schedule a discovery call. If you do not receive a confirmation email, please contact ezinneifegwu@gmail.com.
                 </p>
               </div>
             </div>
@@ -544,7 +544,7 @@ export const WorkWithMeSection: React.FC = () => {
             {/* Submit Button */}
             <div className="pt-4 border-t border-[#F0F0EB] flex flex-col sm:flex-row items-center justify-between gap-3">
               <p className="text-xs text-[#888888]">
-                * Submitting directly opens your Calendly discovery call booking window.
+                * Submit your inquiry first. You can schedule your discovery call on the next screen.
               </p>
 
               <button
