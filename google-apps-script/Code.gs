@@ -80,7 +80,7 @@ function doPost(event) {
     const name = String(data.fullName || '').trim();
     const email = String(data.email || '').trim();
 
-    if (!name || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return jsonResponse({ ok: false, error: 'A name and valid email are required' });
     }
 
@@ -133,7 +133,7 @@ function doPost(event) {
       'Submitted: ' + submittedAt,
       '',
       'Open the inquiry sheet: ' + spreadsheet.getUrl()
-    ].join('\\n');
+    ].join('\n');
 
     MailApp.sendEmail({
       to: NOTIFICATION_EMAIL,
